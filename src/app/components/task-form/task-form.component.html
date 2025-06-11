@@ -1,0 +1,53 @@
+<!-- File: Extractify.Frontend/src/app/task-form/task-form.component.html -->
+<div class="container">
+  <h2>Create Scraping Task</h2>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Website URL</mat-label>
+      <input matInput [formControl]="urlControl" name="url" required type="url" (blur)="onUrlBlur()">
+      <mat-hint>Enter a valid URL (e.g., https://quotes.toscrape.com)</mat-hint>
+      <mat-error *ngIf="urlControl.invalid && urlControl.touched">Invalid URL</mat-error>
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="useAdvancedMode" name="advancedMode">Use advanced settings</mat-checkbox>
+    <div *ngIf="useAdvancedMode">
+      <mat-form-field appearance="fill">
+        <mat-label>Text Selector (CSS)</mat-label>
+        <input matInput [formControl]="selectorControl" name="selector" [matAutocomplete]="autoText">
+        <mat-autocomplete #autoText="matAutocomplete">
+          <mat-option *ngFor="let selector of suggestedSelectors | async" [value]="selector">
+            {{ selector }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-hint>Example: h1, .title, .text, .author</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Image Selector (CSS)</mat-label>
+        <input matInput [formControl]="imageSelectorControl" name="imageSelector" [matAutocomplete]="autoImage">
+        <mat-autocomplete #autoImage="matAutocomplete">
+          <mat-option *ngFor="let selector of suggestedImageSelectors | async" [value]="selector">
+            {{ selector }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-hint>Example: img, .image, img[src]</mat-hint>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="urlControl.invalid">Create Task</button>
+  </form>
+</div>
+
+
+<!-- <div class="container">
+  <h2>Create Scraping Task</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="url">URL:</label>
+      <input id="url" [(ngModel)]="task.url" name="url" class="form-control" required pattern="https?://.+">
+    </div>
+    <div class="form-group">
+      <label for="selector">CSS Selector:</label>
+      <input id="selector" [(ngModel)]="task.selector" name="selector" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Task</button>
+    <a routerLink="/tasks" class="btn btn-secondary">Cancel</a>
+  </form>
+</div> -->

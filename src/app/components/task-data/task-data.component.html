@@ -1,0 +1,27 @@
+<!-- File: Extractify.Frontend/src/app/task-data/task-data.component.html -->
+<div class="container">
+  <h2>Scraped Data for Task ID {{ taskId }}</h2>
+  <div *ngIf="data.length === 0">No data available.</div>
+  <div *ngFor="let item of data" class="data-item">
+    <p *ngIf="item.content"><strong>Text:</strong> {{ item.content }}</p>
+    <div *ngIf="item.imageUrl">
+      <strong>Image:</strong>
+      <img [src]="item.imageUrl" alt="Scraped Image" style="max-width: 200px;" loading="lazy">
+    </div>
+    <p><strong>Scraped At:</strong> {{ item.scrapedAt | date }}</p>
+  </div>
+</div>
+
+
+<!-- <div class="container">
+  <h2>Scraped Data for Task {{ taskId }}</h2>
+  <div *ngIf="data.length === 0">No data available.</div>
+  <div *ngFor="let item of data" class="data-item">
+    <p><strong>Text:</strong> {{ item.content }}</p>
+    <div *ngIf="item.imageUrl">
+      <strong>Image:</strong>
+      <img [src]="item.imageUrl" alt="Scraped Image" style="max-width: 200px;" loading="lazy">
+    </div>
+    <p><strong>Scraped At:</strong> {{ item.scrapedAt | date }}</p>
+  </div>
+</div> -->

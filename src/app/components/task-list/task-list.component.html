@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Scraping Tasks</h2>
+  <a routerLink="/create-task" class="btn btn-primary">Create New Task</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>URL</th>
+        <th>Selector</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.scrapingTaskId }}</td>
+        <td>{{ task.url }}</td>
+        <td>{{ task.selector }}</td>
+        <td>{{ task.status }}</td>
+        <td>{{ task.createdAt | date:'medium' }}</td>
+        <td>
+          <button (click)="executeTask(task.scrapingTaskId)" class="btn btn-sm btn-success" [disabled]="task.status === 'Running' || task.status === 'Completed'">Execute</button>
+          <button (click)="viewData(task.scrapingTaskId)" class="btn btn-sm btn-info">View Data</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

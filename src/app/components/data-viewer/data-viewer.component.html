@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Scraped Data for Task {{ taskId }}</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Content</th>
+        <th>Scraped At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of scrapedData">
+        <td>{{ data.scrapedDataId }}</td>
+        <td>{{ data.content }}</td>
+        <td>{{ data.scrapedAt | date:'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <a routerLink="/tasks" class="btn btn-secondary">Back to Tasks</a>
+</div>
